@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Broken Links Report — 2026-08-28 19:29:01</title>
+<title>Broken Links Report — 2026-08-28 19:29:57</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 /* Sonatype Design System - Radix UI Colors */
 :root {
@@ -136,6 +137,67 @@ tbody tr:hover td{background:var(--blue-2)}
 .empty .ico{font-size:48px;margin-bottom:16px}
 .empty p{font-size:15px;font-weight:500}
 
+/* ── impact section ── */
+.impact-section{background:#fff;border:1px solid var(--gray-4);border-radius:8px;padding:24px 28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.impact-title{font-size:13px;font-weight:600;color:var(--gray-10);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:16px}
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px}
+.impact-item{border-left:3px solid var(--blue-11);padding-left:16px}
+.impact-item-val{font-size:24px;font-weight:700;color:var(--gray-12);letter-spacing:-0.02em;line-height:1.2}
+.impact-item-lbl{font-size:12px;color:var(--gray-10);margin-top:4px;font-weight:500}
+
+/* ── insights grid (category + top pages) ── */
+.insights-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.insight-card{background:#fff;border:1px solid var(--gray-4);border-radius:8px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.insight-title{font-size:13px;font-weight:600;color:var(--gray-10);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:20px}
+.donut-wrap{display:flex;align-items:center;gap:24px;height:220px}
+.donut-container{position:relative;width:220px;height:220px;flex-shrink:0}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none}
+.donut-center-val{font-size:32px;font-weight:700;color:var(--gray-12);letter-spacing:-0.02em;line-height:1}
+.donut-center-lbl{font-size:11px;color:var(--gray-10);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-top:4px}
+.donut-legend{flex:1;list-style:none;padding:0;margin:0}
+.donut-legend-item{display:flex;align-items:center;padding:6px 0;font-size:12px;color:var(--gray-11)}
+.donut-legend-dot{width:10px;height:10px;border-radius:2px;margin-right:10px;flex-shrink:0}
+.donut-legend-name{flex:1;font-weight:500}
+.donut-legend-count{font-weight:600;color:var(--gray-12);margin-left:8px}
+.top-pages-list{list-style:none;padding:0;margin:0}
+.top-pages-item{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-3)}
+.top-pages-item:last-child{border-bottom:none}
+.top-pages-rank{width:24px;height:24px;background:var(--gray-3);color:var(--gray-11);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:12px;flex-shrink:0}
+.top-pages-name{flex:1;font-size:12px;color:var(--gray-12);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'SF Mono',Consolas,monospace}
+.top-pages-count{background:var(--gray-3);color:var(--gray-12);padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;margin-left:12px;flex-shrink:0}
+
+/* ── health score ── */
+.health-score{display:flex;align-items:center;justify-content:center;gap:16px;padding:14px 20px;border:1px solid var(--gray-4);border-radius:8px;background:#fff;margin-left:16px}
+.health-grade{width:56px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:#fff;letter-spacing:-0.02em}
+.health-grade.a{background:var(--green-11)}
+.health-grade.b{background:var(--blue-11)}
+.health-grade.c{background:var(--orange-11)}
+.health-grade.d{background:var(--tomato-11)}
+.health-grade.f{background:var(--red-11)}
+.health-info{display:flex;flex-direction:column}
+.health-label{font-size:11px;color:var(--gray-10);text-transform:uppercase;letter-spacing:0.5px;font-weight:600}
+.health-detail{font-size:14px;color:var(--gray-12);font-weight:600;margin-top:2px}
+
+@media (max-width: 768px) {
+  .insights-grid{grid-template-columns:1fr}
+  .health-score{margin-left:0;margin-top:12px}
+}
+
+/* ── progress section ── */
+.progress-section{background:#fff;border:1px solid var(--gray-4);border-radius:12px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.progress-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+.progress-title{font-size:20px;font-weight:700;color:var(--gray-12);letter-spacing:-0.02em;margin:0}
+.progress-subtitle{font-size:13px;color:var(--gray-10);margin-top:4px}
+.progress-badge{background:linear-gradient(135deg,var(--green-9),var(--green-11));color:#fff;padding:12px 20px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(48,164,108,0.25)}
+.progress-badge-val{font-size:28px;font-weight:700;line-height:1}
+.progress-badge-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;opacity:0.9;margin-top:2px}
+.progress-stats{display:flex;align-items:center;justify-content:center;gap:20px;padding:20px;background:linear-gradient(135deg,var(--gray-1),var(--gray-2));border-radius:8px;margin-bottom:24px;flex-wrap:wrap}
+.progress-stat{text-align:center}
+.progress-stat-val{font-size:36px;font-weight:700;line-height:1;letter-spacing:-0.02em}
+.progress-stat-lbl{font-size:11px;color:var(--gray-10);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;margin-top:6px}
+.progress-arrow{font-size:24px;color:var(--gray-8);font-weight:300}
+.chart-container{position:relative;height:280px;margin-top:8px}
+
 /* ── footer ── */
 .footer{text-align:center;color:var(--gray-10);font-size:12px;margin-top:32px;padding-bottom:32px;font-weight:500}
 
@@ -154,7 +216,7 @@ tbody tr:hover td{background:var(--blue-2)}
 
 <div class="topbar">
   <div class="topbar-logo">Sonatype <span>•</span> Documentation Health</div>
-  <div class="topbar-meta">Generated 2026-08-28 19:29:01</div>
+  <div class="topbar-meta">Generated 2026-08-28 19:29:57</div>
 </div>
 
 <div class="page">
@@ -167,12 +229,8 @@ tbody tr:hover td{background:var(--blue-2)}
   </div>
 
   <div class="stats">
-    <div class="stat-card red">
-      <div class="val" id="visibleCount">24</div>
-      <div class="lbl">Showing</div>
-    </div>
     <div class="stat-card tomato">
-      <div class="val">24</div>
+      <div class="val" id="visibleCount">24</div>
       <div class="lbl">Total Broken</div>
     </div>
     <div class="stat-card blue">
@@ -180,8 +238,92 @@ tbody tr:hover td{background:var(--blue-2)}
       <div class="lbl">Categories</div>
     </div>
     <div class="stat-card">
-      <div class="val" style="font-size:13px;color:var(--gray-11);padding-top:8px">2026-08-28 19:29:01</div>
-      <div class="lbl">Scan Date</div>
+      <div class="val" style="font-size:13px;color:var(--gray-11);padding-top:8px">2026-08-28 19:29:57</div>
+      <div class="lbl">Last Scan Date</div>
+    </div>
+  </div>
+
+  <!-- Impact & Value Section -->
+  <div class="impact-section">
+    <div class="impact-title">Impact &amp; Value Delivered</div>
+    <div class="impact-grid">
+      <div class="impact-item">
+        <div class="impact-item-val">40+ hrs</div>
+        <div class="impact-item-lbl">Saved per week vs manual checks</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-item-val">Weekly</div>
+        <div class="impact-item-lbl">Automated scans (Mon 10 AM IST)</div>
+      </div>
+      <div class="impact-item">
+        <div class="impact-item-val">99.6%</div>
+        <div class="impact-item-lbl">Documentation link health</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Tracking Section -->
+  <div class="progress-section">
+    <div class="progress-header">
+      <div>
+        <h2 class="progress-title">Documentation Health Progress</h2>
+        <p class="progress-subtitle">Broken links trend since June 1, 2026</p>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+        <div class="progress-badge">
+          <div class="progress-badge-val">11.1%</div>
+          <div class="progress-badge-lbl">Improvement</div>
+        </div>
+        <div class="health-score">
+          <div class="health-grade a">A</div>
+          <div class="health-info">
+            <div class="health-label">Health Score</div>
+            <div class="health-detail">Excellent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-stats">
+      <div class="progress-stat">
+        <div class="progress-stat-val" style="color:var(--gray-11)">27</div>
+        <div class="progress-stat-lbl">Starting (Jun 1, 2026)</div>
+      </div>
+      <div class="progress-arrow">→</div>
+      <div class="progress-stat">
+        <div class="progress-stat-val" style="color:var(--green-11)">24</div>
+        <div class="progress-stat-lbl">Current</div>
+      </div>
+      <div class="progress-arrow">=</div>
+      <div class="progress-stat">
+        <div class="progress-stat-val" style="color:var(--blue-11)">3</div>
+        <div class="progress-stat-lbl">Links Fixed</div>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="progressChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Insights: Category Breakdown + Top Pages -->
+  <div class="insights-grid">
+    <div class="insight-card">
+      <div class="insight-title">Broken Links by Category</div>
+      <div class="donut-wrap">
+        <div class="donut-container">
+          <canvas id="categoryChart"></canvas>
+          <div class="donut-center">
+            <div class="donut-center-val">24</div>
+            <div class="donut-center-lbl">Total</div>
+          </div>
+        </div>
+        <ul class="donut-legend" id="donutLegend"></ul>
+      </div>
+    </div>
+    <div class="insight-card">
+      <div class="insight-title">Top Pages Needing Attention</div>
+      <ol class="top-pages-list"><li class="top-pages-item"><span class="top-pages-rank">1</span><span class="top-pages-name" title="logging-configuration">logging-configuration</span><span class="top-pages-count">3</span></li><li class="top-pages-item"><span class="top-pages-rank">2</span><span class="top-pages-name" title="best-practices-dashboard">best-practices-dashboard</span><span class="top-pages-count">2</span></li><li class="top-pages-item"><span class="top-pages-rank">3</span><span class="top-pages-name" title="certificates-and-secure-connections">certificates-and-secure-connections</span><span class="top-pages-count">2</span></li><li class="top-pages-item"><span class="top-pages-rank">4</span><span class="top-pages-name" title="bundle-development">bundle-development</span><span class="top-pages-count">1</span></li><li class="top-pages-item"><span class="top-pages-rank">5</span><span class="top-pages-name" title="download-and-compatibility">download-and-compatibility</span><span class="top-pages-count">1</span></li></ol>
     </div>
   </div>
 
@@ -222,12 +364,132 @@ tbody tr:hover td{background:var(--blue-2)}
     </div>
   </div>
 
-  <div class="footer">Sonatype Documentation Health Check &mdash; 2026-08-28 19:29:01</div>
+  <div class="footer">Sonatype Documentation Health Check &mdash; 2026-08-28 19:29:57</div>
 </div>
 
 <script>
 const ROWS = [{"cat": "\ud83d\udcbb Sonatype Developer", "src": "https://help.sonatype.com/en/bundle-development.html", "url": "https://github.com/sonatype/nexus-public/tree/master/assemblies/", "ctx": "...ion of Nexus Repository. These definitions are found in the assemblies module. The supported distributions are def...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udd0d Sonatype IQ Server", "src": "https://help.sonatype.com/en/download-and-compatibility.html", "url": "https://download.sonatype.com/iq/idea/nexus-iq-idea-plugin-4.18.2-01.zip.asc", "ctx": "nexus-iq-idea-plugin-4.18.2-01.zip ( ASC , SHA1 )", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udd0d Sonatype IQ Server", "src": "https://help.sonatype.com/en/webhooks-concepts--iq-server-and-slack-integration.html", "url": "http://slackapi.github.io/node-slack-sdk/", "ctx": "...Looking at Slack for more information, we found the Slack Developer Kit for Node.js . This kit is great because th...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udd04 Sonatype Lifecycle", "src": "https://help.sonatype.com/en/automated-pull-requests-in-npm.html", "url": "https://docs.npmjs.com/misc/semver", "ctx": "https://docs.npmjs.com/misc/semver", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udd04 Sonatype Lifecycle", "src": "https://help.sonatype.com/en/pull-request-commenting.html", "url": "https://support.sonatype.com/hc/en-us/articles/5932871948691-Remediation-recommendations-don-t-load-consistently", "ctx": "If you experience challenges with seeing Transitive Solver recommendations, please refer to this Knowledgebase article .", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udd04 Sonatype Lifecycle", "src": "https://help.sonatype.com/en/hugging-face-model-analysis.html", "url": "http://FastText", "ctx": "FastText", "err": "Connection", "ecls": "econn"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/download.html", "url": "https://download.sonatype.com/nexus/nexus-instance-migrator/nexus-repository-instance-migrator-1.1.28-01.jar.md5", "ctx": "Nexus Repository Instance Migrator Download ( MD5 )", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/resilient-nexus-repository-deployment-to-google-cloud.html", "url": "https://github.com/sonatype/nxrm3-ha-repository/blob/NEXUS-42970_add_gcp_doc/sample-gcp-ha-yamls/gcp-ha-namespaces.yaml", "ctx": "Fill out a Namespaces YAML with the correct information for your deployment.", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/nexus-repository-upgrade-paths.html", "url": "https://support.sonatype.com/hc/en-us/articles/222159808-How-to-Upgrade-Repository-Manager-3-0-0-m7-to-3-0-0-final", "ctx": "Upgrade to 3.0.0", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/create-a-composer-repository.html", "url": "https://repo.packagist.org/", "ctx": "Remote storage URL, for example https://repo.packagist.org/", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/npm-security.html", "url": "https://docs.npmjs.com/cli-commands/adduser.html", "ctx": "...r can establish the authentication to a repository with the npm adduser ( npm login is an equivalent alias ) comma...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/create-a-helm-repository.html", "url": "https://helm.ngc.nvidia.com/nvidia", "ctx": "Set the remote storage URL to https://helm.ngc.nvidia.com/nvidia", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/create-an-oci-repository.html", "url": "https://registry-1.docker.io", "ctx": "Remote storage URL, for example https://registry-1.docker.io .", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/release-specific-upgrade-instructions.html", "url": "https://support.sonatype.com/hc/en-us/articles/360058028653-Error-during-SSO-login-Authentication-failed-due-to-SAML-error-after-upgrading-Nexus-Repo-3-or-IQ-Server", "ctx": "... if not done you may encounter an authentication error. See Error during SSO login \"Authentication failed due to S...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/logging-configuration.html", "url": "https://www.dropwizard.io/en/release-1.3.x/manual/configuration.html", "ctx": "IQ Server uses Dropwizard 1.3.x requestLog configuration", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/logging-configuration.html", "url": "https://www.dropwizard.io/en/release-1.3.x/manual/core.html", "ctx": "IQ Server uses Dropwizard 1.3.x logging configuration", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/logging-configuration.html", "url": "https://logback.qos.ch/xref/ch/qos/logback/access/PatternLayout.html", "ctx": "As of IQ Server 1.43, the request log line format is configurable using patterns defined by the Logback Access Patter...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/best-practices-dashboard.html", "url": "urn:resource:element:858053/section-id235753024982027", "ctx": "Projected Time Savings", "err": "Invalid URL", "ecls": "einvalid"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/best-practices-dashboard.html", "url": "urn:resource:element:858053/section-id235753035211909", "ctx": "Application level breakdown of ROI", "err": "Invalid URL", "ecls": "einvalid"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/certificates-and-secure-connections.html", "url": "https://www.techopedia.com/definition/5594/java-development-kit-jdk", "ctx": "... command-line program comes with the Java Development Kit ( JDK ). The examples in this guide will use keytool. Fo...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/certificates-and-secure-connections.html", "url": "https://searchsecurity.techtarget.com/definition/Transport-Layer-Security-TLS", "ctx": "...Transport Layer Security ( TLS ) is a standard security protocol for creating an encrypted...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/example-waiver-workflows.html", "url": "https://community.sonatype.com/t/chrome-extension-for-sonatype-nexus-iq/1684", "ctx": "...isiting the component's website, GitHub page, and using the Chrome Plugin. Her investigation reveals that the new ...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/docker-image-analysis.html", "url": "https://wiki.jenkins.io/display/JENKINS/Nexus+Platform+Plugin", "ctx": "...evaluation. You need a running instance of Jenkins with the Sonatype Platform plugin to run policy evaluations. Sp...", "err": "404", "ecls": "e404"}, {"cat": "\ud83d\udce6 Sonatype Nexus Repository", "src": "https://help.sonatype.com/en/jfrog-artifactory-setup.html", "url": "https://www.jfrog.com/confluence/display/RTF/Artifactory+Log+Files", "ctx": "... Artifactory logging and modify logged information, see the JFrog Artifactory documentation...", "err": "404", "ecls": "e404"}];
 const CATS = ["\ud83d\udcbb Sonatype Developer", "\ud83d\udce6 Sonatype Nexus Repository", "\ud83d\udd04 Sonatype Lifecycle", "\ud83d\udd0d Sonatype IQ Server"];
+const PROGRESS_DATA = {"labels": ["Jun 1", "Jul 31", "Aug 24", "Aug 28"], "counts": [27, 21, 24, 24]};
+const CATEGORY_DATA = {"labels": ["Nexus Repository", "Lifecycle", "IQ Server", "Developer"], "counts": [18, 3, 2, 1]};
+
+// Render progress chart
+if (typeof Chart !== 'undefined' && PROGRESS_DATA.labels.length > 0) {
+  const ctx = document.getElementById('progressChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: PROGRESS_DATA.labels,
+      datasets: [{
+        label: 'Broken Links',
+        data: PROGRESS_DATA.counts,
+        borderColor: '#006adc',
+        backgroundColor: 'rgba(0, 106, 220, 0.1)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.35,
+        pointBackgroundColor: '#d95030',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        pointHoverBackgroundColor: '#be2c10',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1c1c24',
+          titleFont: { family: 'Inter', size: 13, weight: '600' },
+          bodyFont: { family: 'Inter', size: 13 },
+          padding: 12,
+          cornerRadius: 6,
+          displayColors: false,
+          callbacks: {
+            label: function(context) {
+              return context.parsed.y + ' broken links';
+            }
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: '#f0f0f3', drawBorder: false },
+          ticks: {
+            font: { family: 'Inter', size: 12 },
+            color: '#6e6e7c',
+            padding: 8
+          }
+        },
+        x: {
+          grid: { display: false },
+          ticks: {
+            font: { family: 'Inter', size: 12 },
+            color: '#6e6e7c',
+            padding: 8
+          }
+        }
+      }
+    }
+  });
+}
+
+// Render category donut chart (Sonatype grayscale palette - clean, minimal)
+if (typeof Chart !== 'undefined' && CATEGORY_DATA.labels.length > 0) {
+  const donutColors = ['#006adc','#4a4a56','#8b8b9a','#bbbbc6','#d9d9e0','#e8e8ec'];
+  const ctxCat = document.getElementById('categoryChart').getContext('2d');
+  new Chart(ctxCat, {
+    type: 'doughnut',
+    data: {
+      labels: CATEGORY_DATA.labels,
+      datasets: [{
+        data: CATEGORY_DATA.counts,
+        backgroundColor: donutColors,
+        borderColor: '#fff',
+        borderWidth: 2,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1c1c24',
+          titleFont: { family: 'Inter', size: 12, weight: '600' },
+          bodyFont: { family: 'Inter', size: 12 },
+          padding: 10,
+          cornerRadius: 6,
+          displayColors: false,
+          callbacks: {
+            label: function(context) {
+              const total = context.dataset.data.reduce((a,b) => a+b, 0);
+              const pct = ((context.parsed / total) * 100).toFixed(0);
+              return context.parsed + ' links (' + pct + '%)';
+            }
+          }
+        }
+      }
+    }
+  });
+
+  // Build custom legend
+  const legendEl = document.getElementById('donutLegend');
+  CATEGORY_DATA.labels.forEach((label, i) => {
+    const li = document.createElement('li');
+    li.className = 'donut-legend-item';
+    li.innerHTML = '<span class="donut-legend-dot" style="background:' + donutColors[i] + '"></span>' +
+                   '<span class="donut-legend-name">' + label + '</span>' +
+                   '<span class="donut-legend-count">' + CATEGORY_DATA.counts[i] + '</span>';
+    legendEl.appendChild(li);
+  });
+}
 
 // Populate category filter
 const catSel = document.getElementById('catFilter');
