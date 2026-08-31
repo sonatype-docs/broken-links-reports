@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Broken Links Report — 2026-08-31 20:09:40</title>
+<title>Broken Links Report — 2026-08-31 20:22:56</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -135,6 +135,31 @@ tbody tr:hover td{background:var(--blue-2)}
 .einvalid{background:linear-gradient(135deg,var(--gray-2),var(--gray-1));color:var(--gray-11);border:1px solid var(--gray-4)}
 .eother{background:linear-gradient(135deg,var(--gray-2),var(--gray-1));color:var(--gray-11);border:1px solid var(--gray-4)}
 
+/* ── clickable stat ── */
+.progress-stat.clickable{cursor:pointer;transition:transform 0.15s ease,box-shadow 0.15s ease}
+.progress-stat.clickable:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,106,220,0.15)}
+
+/* ── modal styles ── */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:9999;animation:fadeIn 0.2s ease}
+.modal-overlay.active{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.modal-container{background:#fff;border-radius:12px;width:90%;max-width:800px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:slideUp 0.3s ease}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--gray-4)}
+.modal-title{font-size:18px;font-weight:700;color:var(--gray-12)}
+.modal-close{background:none;border:none;font-size:24px;color:var(--gray-10);cursor:pointer;padding:4px;line-height:1;transition:color 0.15s ease}
+.modal-close:hover{color:var(--red-11)}
+.modal-body{padding:0 24px;overflow-y:auto;flex:1}
+.modal-footer{padding:16px 24px;border-top:1px solid var(--gray-4);display:flex;justify-content:space-between;align-items:center}
+.modal-count{font-size:13px;color:var(--gray-10)}
+.fixed-links-list{list-style:none;padding:0;margin:16px 0}
+.fixed-link-item{display:flex;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--gray-3);gap:12px}
+.fixed-link-item:last-child{border-bottom:none}
+.fixed-link-category{background:var(--blue-3);color:var(--blue-11);padding:4px 10px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;white-space:nowrap;flex-shrink:0;min-width:120px;text-align:center}
+.fixed-link-url{font-size:12px;color:var(--gray-12);word-break:break-all;font-family:'SF Mono',Consolas,monospace;line-height:1.5}
+.fixed-link-group{margin-bottom:16px}
+.fixed-link-group-title{font-size:11px;font-weight:700;color:var(--gray-10);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--gray-3)}
+
 /* ── empty state ── */
 .empty{text-align:center;padding:80px 20px;color:var(--gray-10)}
 .empty .ico{font-size:48px;margin-bottom:16px}
@@ -219,7 +244,7 @@ tbody tr:hover td{background:var(--blue-2)}
 
 <div class="topbar">
   <div class="topbar-logo">Sonatype <span>•</span> Documentation Health</div>
-  <div class="topbar-meta">Generated 2026-08-31 20:09:40</div>
+  <div class="topbar-meta">Generated 2026-08-31 20:22:56</div>
 </div>
 
 <div class="page">
@@ -241,7 +266,7 @@ tbody tr:hover td{background:var(--blue-2)}
       <div class="lbl">Categories</div>
     </div>
     <div class="stat-card">
-      <div class="val" style="font-size:13px;color:var(--gray-11);padding-top:8px">2026-08-31 20:09:40</div>
+      <div class="val" style="font-size:13px;color:var(--gray-11);padding-top:8px">2026-08-31 20:22:56</div>
       <div class="lbl">Last Scan Date</div>
     </div>
     <div class="stat-card">
@@ -249,7 +274,7 @@ tbody tr:hover td{background:var(--blue-2)}
       <div class="lbl">Mon 10 AM IST</div>
     </div>
     <div class="stat-card green">
-      <div class="val">99.67%</div>
+      <div class="val">99.51%</div>
       <div class="lbl">Link Health</div>
     </div>
   </div>
@@ -282,9 +307,9 @@ tbody tr:hover td{background:var(--blue-2)}
         <div class="progress-stat-lbl">Total Ever Broken (Jun 1+)</div>
       </div>
       <div class="progress-arrow">−</div>
-      <div class="progress-stat">
+      <div class="progress-stat clickable" onclick="showFixedLinksModal()" title="Click to view all fixed links">
         <div class="progress-stat-val" style="color:var(--blue-11)">27</div>
-        <div class="progress-stat-lbl">Links Fixed</div>
+        <div class="progress-stat-lbl">Links Fixed <span style="font-size:10px;opacity:0.7">[view]</span></div>
       </div>
       <div class="progress-arrow">=</div>
       <div class="progress-stat">
@@ -315,7 +340,7 @@ tbody tr:hover td{background:var(--blue-2)}
     </div>
     <div class="insight-card">
       <div class="insight-title">Top Pages Needing Attention</div>
-      <ol class="top-pages-list"><li class="top-pages-item"><span class="top-pages-rank">1</span><span class="top-pages-name" title="logging-configuration">logging-configuration</span><span class="top-pages-count">3</span></li><li class="top-pages-item"><span class="top-pages-rank">2</span><span class="top-pages-name" title="certificates-and-secure-connections">certificates-and-secure-connections</span><span class="top-pages-count">2</span></li><li class="top-pages-item"><span class="top-pages-rank">3</span><span class="top-pages-name" title="download">download</span><span class="top-pages-count">1</span></li><li class="top-pages-item"><span class="top-pages-rank">4</span><span class="top-pages-name" title="resilient-nexus-repository-deployment-to-google-cloud">resilient-nexus-repository-deployment-to-google-cl...</span><span class="top-pages-count">1</span></li><li class="top-pages-item"><span class="top-pages-rank">5</span><span class="top-pages-name" title="nexus-repository-upgrade-paths">nexus-repository-upgrade-paths</span><span class="top-pages-count">1</span></li></ol>
+      <ol class="top-pages-list"><li class="top-pages-item"><span class="top-pages-rank">1</span><span class="top-pages-name" title="logging-configuration">logging-configuration</span><span class="top-pages-count">3</span></li><li class="top-pages-item"><span class="top-pages-rank">2</span><span class="top-pages-name" title="certificates-and-secure-connections">certificates-and-secure-connections</span><span class="top-pages-count">2</span></li><li class="top-pages-item"><span class="top-pages-rank">3</span><span class="top-pages-name" title="release-specific-upgrade-instructions">release-specific-upgrade-instructions</span><span class="top-pages-count">1</span></li><li class="top-pages-item"><span class="top-pages-rank">4</span><span class="top-pages-name" title="download-and-compatibility">download-and-compatibility</span><span class="top-pages-count">1</span></li><li class="top-pages-item"><span class="top-pages-rank">5</span><span class="top-pages-name" title="automated-pull-requests-in-npm">automated-pull-requests-in-npm</span><span class="top-pages-count">1</span></li></ol>
     </div>
   </div>
 
@@ -356,7 +381,7 @@ tbody tr:hover td{background:var(--blue-2)}
     </div>
   </div>
 
-  <div class="footer">Sonatype Documentation Health Check &mdash; 2026-08-31 20:09:40</div>
+  <div class="footer">Sonatype Documentation Health Check &mdash; 2026-08-31 20:22:56</div>
 </div>
 
 <script>
@@ -534,6 +559,74 @@ function clearFilters() {
   document.getElementById('errFilter').value = '';
   applyFilters();
 }
+
+// Fixed links modal functionality
+const FIXED_LINKS = [{"url": "http://https://discuss.gradle.org/t/is-there-any-way-to-skip-gradle-instrumenting-classpath-file-transformer/45213/3", "category": "Malformed URLs"}, {"url": "http://https://proxy.golang.org", "category": "Malformed URLs"}, {"url": "http://https://wiki.debian.org/DebianRepository/Format", "category": "Malformed URLs"}, {"url": "http://your-host:8095/crowd", "category": "Placeholder URLs"}, {"url": "https://download.sonatype.com/iq/idea/nexus-iq-idea-plugin-4.18.1-01.zip.asc", "category": "Other Fixes"}, {"url": "https://github.com/samplecount/samplerepo.", "category": "GitHub References"}, {"url": "https://help.sonatype.com/en/404-page.html", "category": "Invalid 404 References"}, {"url": "https://help.sonatype.com/en/404-page.html#content-wrapper", "category": "Invalid 404 References"}, {"url": "https://plugins.jenkins.io/nexus-jenkins-plugin/", "category": "Other Fixes"}, {"url": "https://repo.sonatype.com/repository/sonatype-hosted/pki/deb-gpg/GPG-KEY-sonatype-apt-hosted.asc ", "category": "Other Fixes"}, {"url": "https://repo1.dso.mil/dsop/sonatype/nexus-iq-server/nexus-iq-server", "category": "DSOP Repository"}, {"url": "https://repo1.dso.mil/dsop/sonatype/nexus/nexus", "category": "DSOP Repository"}, {"url": "https://sso.your.domain/auth/realms/nexus", "category": "Placeholder URLs"}, {"url": "https://support.sonatype.com/hc/en-us/articles/1500000415082-CVE-2020-29436-Nexus-Repository-Manager-3-XML-External-Entities-injection-2020-12-15", "category": "Sonatype Support Articles"}, {"url": "https://support.sonatype.com/hc/en-us/articles/4408801690515", "category": "Sonatype Support Articles"}, {"url": "https://support.sonatype.com/hc/en-us/articles/4409326330003", "category": "Sonatype Support Articles"}, {"url": "urn:resource:component:116739", "category": "Invalid URN Links"}, {"url": "urn:resource:component:116758/id_SSLandRepositoryConnectorConfiguration-SupportforDockerRegistryAPI", "category": "Invalid URN Links"}, {"url": "urn:resource:component:140135", "category": "Invalid URN Links"}, {"url": "urn:resource:component:213657", "category": "Invalid URN Links"}, {"url": "urn:resource:component:252381", "category": "Invalid URN Links"}, {"url": "urn:resource:component:747831", "category": "Invalid URN Links"}, {"url": "urn:resource:component:798517", "category": "Invalid URN Links"}, {"url": "urn:resource:component:801328", "category": "Invalid URN Links"}, {"url": "urn:resource:element:548829/section-id235438482071306", "category": "Invalid URN Links"}, {"url": "urn:resource:element:798517/section-id753694331981922", "category": "Invalid URN Links"}, {"url": "urn:resource:element:858053/section-id235753024982027", "category": "Invalid URN Links"}, {"url": "urn:resource:element:858053/section-id235753035211909", "category": "Invalid URN Links"}];
+
+function showFixedLinksModal() {
+  // Create modal if it doesn't exist
+  let modal = document.getElementById('fixedLinksModal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'fixedLinksModal';
+    modal.className = 'modal-overlay';
+    modal.onclick = function(e) {
+      if (e.target === modal) closeFixedLinksModal();
+    };
+
+    // Group fixed links by category
+    const grouped = {};
+    FIXED_LINKS.forEach(link => {
+      if (!grouped[link.category]) grouped[link.category] = [];
+      grouped[link.category].push(link.url);
+    });
+
+    let listHtml = '';
+    Object.entries(grouped).sort((a,b) => a[0].localeCompare(b[0])).forEach(([cat, urls]) => {
+      listHtml += `<div class="fixed-link-group">`;
+      listHtml += `<div class="fixed-link-group-title">${cat} (${urls.length})</div>`;
+      urls.forEach(url => {
+        listHtml += `<div class="fixed-link-item">
+          <div class="fixed-link-url">${url}</div>
+        </div>`;
+      });
+      listHtml += `</div>`;
+    });
+
+    modal.innerHTML = `
+      <div class="modal-container">
+        <div class="modal-header">
+          <div class="modal-title">Fixed Links Since June 1, 2026</div>
+          <button class="modal-close" onclick="closeFixedLinksModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <ul class="fixed-links-list">${listHtml}</ul>
+        </div>
+        <div class="modal-footer">
+          <div class="modal-count">${FIXED_LINKS.length} links fixed and verified</div>
+          <button onclick="closeFixedLinksModal()" style="background:var(--blue-11);color:#fff;border:none;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s ease" onmouseover="this.style.background='var(--blue-10)'" onmouseout="this.style.background='var(--blue-11)'">Close</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFixedLinksModal() {
+  const modal = document.getElementById('fixedLinksModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeFixedLinksModal();
+});
 
 applyFilters();
 </script>
